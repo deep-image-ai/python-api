@@ -45,6 +45,9 @@ def transform_file(args):
     values = {'transformations': types}
 
     r = requests.post(url, files=files, data=values, headers=headers)
+    if r.status_code != 200:
+        print(f'Something went wrong {r.text}')
+        exit()
     r = r.json()
     print('Getting job...')
     job = r.get('job')
